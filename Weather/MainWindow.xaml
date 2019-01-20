@@ -1,0 +1,137 @@
+﻿<Window x:Class="Weather.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Weather"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="900" Width="850" WindowStartupLocation="CenterScreen" 
+        Icon="{Binding CurrentWeather.WindowIcon, UpdateSourceTrigger=PropertyChanged}" 
+        Background="{Binding CurrentWeather.WindowBackground, UpdateSourceTrigger=PropertyChanged}">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock HorizontalAlignment="Center" FontSize="25"
+                       Text="{Binding CurrentWeather.LocationName, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <WrapPanel HorizontalAlignment="Center">
+                <Image Stretch="None" Source="{Binding CurrentWeather.CurrentWeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock FontSize="20" Text="{Binding CurrentWeather.CurrentTemperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+            </WrapPanel>
+
+            <TextBlock HorizontalAlignment="Center" FontSize="17"
+                       Text="{Binding CurrentWeather.CurrentWeatherDescription, UpdateSourceTrigger=PropertyChanged}"/>
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Padding="5" 
+                           Text="{Binding CurrentWeather.CurrentPressure, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Padding="5" 
+                           Text="{Binding CurrentWeather.CurrentHumidity, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Padding="5" 
+                           Text="Wind: "/>
+                <Image Width="22" Height="22" Source="Data/Images/WindDirIcon/WindDirArrow.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding CurrentWeather.Angle, UpdateSourceTrigger=PropertyChanged}"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Padding="5" 
+                           Text="{Binding CurrentWeather.CurrentWindDirection, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Padding="5" 
+                           Text="{Binding CurrentWeather.CurrentWindSpeed, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Padding="5" 
+                           Text="{Binding Current.CloudPercentage, UpdateSourceTrigger=PropertyChanged}"/>
+            </WrapPanel>
+
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Padding="5"
+                    Text="{Binding CurrentWeather.CurrentSunrise, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Padding="5"
+                           Text="{Binding CurrentWeather.CurrentSunset, UpdateSourceTrigger=PropertyChanged}"/>
+            </WrapPanel>
+            <TextBlock HorizontalAlignment="Center" FontSize="17" FontWeight="Bold" 
+                       Text="{Binding CurrentWeather.LastUpdate, UpdateSourceTrigger=PropertyChanged}"/>
+            <Border Background="Black" Margin="30,0,30,0" BorderBrush="Black" BorderThickness="1"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <WrapPanel Name="DayForecastWrapPanel">
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[0].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[0].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[0].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[0].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[1].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[1].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[1].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[1].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[2].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[2].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[2].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[2].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[3].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[3].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[3].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[3].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[4].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[4].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[4].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[4].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[5].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[5].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[5].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[5].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[6].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[6].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[6].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[6].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[7].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[7].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[7].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[7].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[8].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[8].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[8].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[8].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[9].TimeOfDay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <Image Stretch="None" Source="{Binding DayForecast[9].WeatherIcon, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[9].WeatherDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                    <TextBlock FontSize="12" Text="{Binding DayForecast[9].Temperature, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Padding="10,0,10,0"/>
+                </StackPanel>
+            </WrapPanel>
+            <Border Background="Black" Margin="30,0,30,0" BorderBrush="Black" BorderThickness="1"/>
+            <WrapPanel Name="WeekForecastWrapPanel">
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</Window>
